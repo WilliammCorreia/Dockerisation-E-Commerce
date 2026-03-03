@@ -14,10 +14,6 @@ beforeAll(async () => {
   }
 
   mongod = await MongoMemoryServer.create({
-    binary: {
-      version: '4.4.18',
-      skipMD5: true
-    },
     instance: {
       storageEngine: 'wiredTiger'
     }
