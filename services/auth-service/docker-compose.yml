@@ -1,0 +1,23 @@
+services:
+  auth-service:
+    build: .
+    ports:
+      - "4012:3001"
+    volumes:
+      - "/app/node_modules"
+      - ".:/app"
+    depends_on:
+      - mongodb-e-commerce
+    networks:
+      - e-commerce
+  
+  mongodb-e-commerce:
+    image: mongo:4.4.30-focal
+    ports:
+      - "4013:27017"
+    networks:
+      - e-commerce
+  
+networks:
+  e-commerce:
+    driver: bridge
