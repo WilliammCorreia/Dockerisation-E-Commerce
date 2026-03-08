@@ -1,11 +1,10 @@
 services:
   auth-service:
-    build: .
+    build:
+      context: .
+      target: base
     ports:
       - "4012:3001"
-    volumes:
-      - "/app/node_modules"
-      - ".:/app"
     depends_on:
       - mongodb-e-commerce
     networks:

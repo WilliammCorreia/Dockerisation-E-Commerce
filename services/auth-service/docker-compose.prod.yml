@@ -1,0 +1,5 @@
+services:
+  auth-service:
+    build:
+      context: .
+      target: prod
