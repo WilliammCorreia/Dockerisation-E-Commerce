@@ -3,3 +3,10 @@ services:
     build:
       context: .
       target: prod
+    env_file: ".env.production"
+    secrets:
+      - jwt_secret
+  
+secrets:
+  jwt_secret:
+    file: ./jwt_secret.txt

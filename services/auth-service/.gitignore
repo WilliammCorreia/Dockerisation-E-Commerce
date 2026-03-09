@@ -2,3 +2,4 @@ node_modules/
 coverage/
 package-lock.json
 gl-code-quality-report.json
+jwt_secret.txt

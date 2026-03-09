@@ -6,3 +6,10 @@ services:
     volumes:
       - "/app/node_modules"
       - ".:/app"
+    env_file: ".env"
+    secrets:
+      - jwt_secret
+  
+secrets:
+  jwt_secret:
+    file: ./jwt_secret.txt

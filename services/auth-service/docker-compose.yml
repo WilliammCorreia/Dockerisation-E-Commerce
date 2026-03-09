@@ -4,7 +4,7 @@ services:
       context: .
       target: base
     ports:
-      - "4012:3001"
+      - "4012:${PORT:-3001}"
     depends_on:
       - mongodb-e-commerce
     networks:
