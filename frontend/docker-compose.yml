@@ -1,0 +1,11 @@
+services:
+  frontend:
+    build:
+      context: .
+      target: base
+    ports:
+      - "4010:${PORT:-8080}"
+
+networks:
+  e-commerce:
+    driver: bridge
