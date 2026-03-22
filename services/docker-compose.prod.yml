@@ -1,0 +1,15 @@
+services:
+  auth-service:
+    build:
+      context: ./auth-service
+      target: prod
+    env_file: "auth-service/.env.production"
+    secrets:
+      - jwt_secret
+  order-service:
+    build:
+      context: ./order-service
+      target: prod
+    env_file: "order-service/.env.production"
+    secrets:
+      - jwt_secret

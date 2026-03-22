@@ -9,7 +9,7 @@ RUN npm install
 # Développement
 FROM base AS dev
 
-EXPOSE 3001
+EXPOSE 3002
 
 CMD ["npm", "run", "dev"]
 
@@ -30,7 +30,7 @@ RUN npm i --omit=dev
 
 COPY . .
 
-EXPOSE 3001
+EXPOSE 3002
 
 USER node
 
