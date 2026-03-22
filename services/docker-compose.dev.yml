@@ -1,0 +1,21 @@
+services:
+  auth-service:
+    build:
+      context: ./auth-service
+      target: dev
+    volumes:
+      - "/app/node_modules"
+      - "./auth-service:/app"
+    env_file: "auth-service/.env"
+    secrets:
+      - jwt_secret
+  order-service:
+    build:
+      context: ./order-service
+      target: dev
+    volumes:
+      - "/app/node_modules"
+      - "./order-service:/app"
+    env_file: "order-service/.env"
+    secrets:
+      - jwt_secret
