@@ -14,6 +14,11 @@ EXPOSE 8080
 CMD ["npm", "run", "dev"]
 
 # Test
+FROM base AS test
+
+COPY . .
+
+RUN npm run test
 
 # Build
 FROM base AS build
