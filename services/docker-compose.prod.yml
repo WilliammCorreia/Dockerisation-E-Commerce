@@ -6,6 +6,7 @@ services:
     env_file: "auth-service/.env.production"
     secrets:
       - jwt_secret
+      
   order-service:
     build:
       context: ./order-service
@@ -13,3 +14,7 @@ services:
     env_file: "order-service/.env.production"
     secrets:
       - jwt_secret
+
+secrets:
+  jwt_secret:
+    file: ./jwt_secret.prod.txt
