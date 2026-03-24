@@ -9,6 +9,7 @@ services:
     env_file: "auth-service/.env"
     secrets:
       - jwt_secret
+
   order-service:
     build:
       context: ./order-service
@@ -19,3 +20,18 @@ services:
     env_file: "order-service/.env"
     secrets:
       - jwt_secret
+  
+  product-service:
+    build:
+      context: ./product-service
+      target: dev
+    volumes:
+      - "/app/node_modules"
+      - "./product-service:/app"
+    env_file: "product-service/.env"
+    secrets:
+      - jwt_secret
+
+secrets:
+  jwt_secret:
+    file: ./jwt_secret.dev.txt
