@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
+    "dev": "nodemon -L src/app.js",
     "test": "cross-env NODE_ENV=test NODE_OPTIONS='--experimental-vm-modules' jest --detectOpenHandles --forceExit --coverage --reporters=default --reporters=jest-junit --runInBand --testTimeout=90000",
     "lint": "eslint . --ext .js --format json --output-file gl-code-quality-report.json"
   },

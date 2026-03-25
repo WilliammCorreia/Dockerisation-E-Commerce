@@ -9,6 +9,9 @@ services:
       - mongodb-e-commerce
     networks:
       - e-commerce
+    secrets:
+      - jwt_secret
+
   order-service:
     build:
       context: ./order-service
@@ -19,6 +22,22 @@ services:
       - mongodb-e-commerce
     networks:
       - e-commerce
+    secrets:
+      - jwt_secret
+
+  product-service:
+    build:
+      context: ./product-service
+      target: base
+    ports:
+      - "4015:${PORT:-3000}"
+    depends_on:
+      - mongodb-e-commerce
+    networks:
+      - e-commerce
+    secrets:
+      - jwt_secret
+
   mongodb-e-commerce:
     image: mongo:4.4.30-focal
     ports:
