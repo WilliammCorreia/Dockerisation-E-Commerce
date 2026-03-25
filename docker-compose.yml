@@ -9,10 +9,12 @@ services:
       - e-commerce-frontend
       - e-commerce-backend
     depends_on:
-      - frontend
-      - auth-service
-      - order-service
-      - product-service
+      auth-service:
+        condition: service_healthy
+      order-service:
+        condition: service_healthy
+      product-service:
+        condition: service_healthy
 
   frontend:
     build:
@@ -30,10 +32,16 @@ services:
     secrets:
       - jwt_secret
     depends_on:
-      - mongodb-e-commerce
+      mongodb-e-commerce :
+        condition: service_healthy
     networks:
       - e-commerce-backend
       - e-commerce-db
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3001/api/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
 
   order-service:
     build:
@@ -42,10 +50,16 @@ services:
     secrets:
       - jwt_secret
     depends_on:
-      - mongodb-e-commerce
+      mongodb-e-commerce:
+        condition: service_healthy
     networks:
       - e-commerce-backend
       - e-commerce-db
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3002/api/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
 
   product-service:
     build:
@@ -54,15 +68,28 @@ services:
     secrets:
       - jwt_secret
     depends_on:
-      - mongodb-e-commerce
+      mongodb-e-commerce:
+        condition: service_healthy
     networks:
       - e-commerce-backend
       - e-commerce-db
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/api/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
 
   mongodb-e-commerce:
     image: mongo:4.4.30-focal
     networks:
       - e-commerce-db
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   e-commerce-frontend:
@@ -75,3 +102,6 @@ networks:
 secrets:
   jwt_secret:
     file: ./jwt_secret.txt
+
+volumes:
+  mongodb_data:
