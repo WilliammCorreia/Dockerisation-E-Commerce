@@ -36,7 +36,7 @@ jobs:
           fi
 
       - name: Scan de sécurité avec Trivy
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.35.0
         with:
           image-ref: 'ghcr.io/williammcorreia/e-commerce-frontend:latest'
           format: 'table'
