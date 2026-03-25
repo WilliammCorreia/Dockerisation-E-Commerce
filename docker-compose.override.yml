@@ -1,0 +1,40 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      target: dev
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    env_file: "frontend/.env"
+    
+  auth-service:
+    build:
+      context: ./services/auth-service
+      target: dev
+    volumes:
+      - "/app/node_modules"
+      - "./services/auth-service:/app"
+    env_file: "./services/auth-service/.env"
+
+  order-service:
+    build:
+      context: ./services/order-service
+      target: dev
+    volumes:
+      - "/app/node_modules"
+      - "./services/order-service:/app"
+    env_file: "./services/order-service/.env"
+
+  product-service:
+    build:
+      context: ./services/product-service
+      target: dev
+    volumes:
+      - "/app/node_modules"
+      - "./services/product-service:/app"
+    env_file: "./services/product-service/.env"
+
+secrets:
+  jwt_secret:
+    file: ./jwt_secret.dev.txt

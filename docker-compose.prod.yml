@@ -1,0 +1,28 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      target: prod
+    env_file: "frontend/.env.production"
+    
+  auth-service:
+    build:
+      context: ./services/auth-service
+      target: prod
+    env_file: "./services/auth-service/.env.production"
+
+  order-service:
+    build:
+      context: ./services/order-service
+      target: prod
+    env_file: "./services/order-service/.env.production"
+
+  product-service:
+    build:
+      context: ./services/product-service
+      target: prod
+    env_file: "./services/product-service/.env.production"
+
+secrets:
+  jwt_secret:
+    file: ./jwt_secret.prod.txt

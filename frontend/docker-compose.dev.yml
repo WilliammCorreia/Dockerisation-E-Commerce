@@ -1,8 +1,0 @@
-services:
-  frontend:
-    build:
-      context: .
-      target: dev
-    volumes:
-      - /app/node_modules
-      - ./:/app

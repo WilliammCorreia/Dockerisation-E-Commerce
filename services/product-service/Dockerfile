@@ -4,10 +4,13 @@ WORKDIR /app
 
 COPY package*.json .
 
-RUN npm i
+RUN npm install
+
 # Développement
 FROM base AS dev
+
 EXPOSE 3000
+
 CMD ["npm", "run", "dev"]
 
 # Test
@@ -31,4 +34,4 @@ EXPOSE 3000
 
 USER node
 
-CMD ["npm", "run", "start"] 
+CMD ["npm", "run", "start"]
