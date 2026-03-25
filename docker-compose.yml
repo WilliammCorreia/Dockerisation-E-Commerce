@@ -1,5 +1,6 @@
 services:
   reverse-proxy:
+    image: ghcr.io/williammcorreia/dockerisation-e-commerce/reverse-proxy:latest
     build:
       context: ./reverse-proxy
       dockerfile: Dockerfile
@@ -17,6 +18,7 @@ services:
         condition: service_healthy
 
   frontend:
+    image: ghcr.io/williammcorreia/dockerisation-e-commerce/frontend:latest
     build:
       context: ./frontend
       target: base
@@ -26,6 +28,7 @@ services:
       - e-commerce-frontend
     
   auth-service:
+    image: ghcr.io/williammcorreia/dockerisation-e-commerce/auth-service:latest
     build:
       context: ./services/auth-service
       target: base
@@ -44,6 +47,7 @@ services:
       retries: 3
 
   order-service:
+    image: ghcr.io/williammcorreia/dockerisation-e-commerce/order-service:latest
     build:
       context: ./services/order-service
       target: base
@@ -62,6 +66,7 @@ services:
       retries: 3
 
   product-service:
+    image: ghcr.io/williammcorreia/dockerisation-e-commerce/product-service:latest
     build:
       context: ./services/product-service
       target: base
